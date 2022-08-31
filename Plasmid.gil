@@ -1,0 +1,214 @@
+/*
+This library contains all the sequences and operations for the plasmid (addgene p46815)
+*/
+
+//______________________________________________________________________________
+// The plasmid - only thing you really *need* to worry about
+//______________________________________________________________________________
+
+operation plasmid
+{
+    BeforeRestrictionSite
+    $InnerCode
+    AfterRestrictionSite
+}
+
+
+
+
+//______________________________________________________________________________
+// The sequences and operations that make up the plasmid
+//______________________________________________________________________________
+
+
+//So that the stuff before the plasmid can be cut out when we want to synthesize the insert
+[FullBuild]
+sequence BeforeRestrictionSite
+{
+    ADH1_Terminator
+    RandomJunk_1
+    TEF1
+    'ttttaattacaaggatccg'
+    T7_Promoter
+    'gcccgggcg'
+}
+
+[FullBuild]
+sequence AfterRestrictionSite
+{
+    'catg'
+    MYC
+    'gagtaagcttggtaccgcggctagctaag'
+    CYC1_Terminator
+    RandomJunk_2
+    ori
+    RandomJunk_3
+    ReverseAmpR
+    ReverseAmpR_Promoter
+    'cacatttccccgaaaagtgccacctg'
+    2u_ori
+    'atggtagacaacccttaat'
+
+    ReverseLoxP
+        'taggtctagagatctgtttagcttgcctcgtccccgccgggtcacccggccagc'
+        .P_TEF
+        {
+            KanR
+            'tcagt'
+        }
+        'ctgtcgattcgatactaacgccgccatccagtgtcgaaaacgagctctcgagaacccttaat'
+    ReverseLoxP
+
+    'taggtgatatcagatccacta'
+}
+
+
+
+sequence ReverseLoxP
+{
+    'ataacttcgtataatgtatgctatacgaagttat'
+}
+
+sequence 2u_ori
+{
+    'aacgaagcatctgtgcttcattttgtagaacaaaaatgcaacgcgagagcgctaatttttcaaacaaagaatctgagctgcatttttacagaacagaaatgcaacgcgaaa
+    gcgctattttaccaacgaagaatctgtgcttcatttttgtaaaacaaaaatgcaacgcgagagcgctaatttttcaaacaaagaatctgagctgcatttttacagaacagaa
+    atgcaacgcgagagcgctattttaccaacaaagaatctatacttcttttttgttctacaaaaatgcatcccgagagcgctatttttctaacaaagcatcttagattactttt
+    tttctcctttgtgcgctctataatgcagtctcttgataactttttgcactgtaggtccgttaaggttagaagaaggctactttggtgtctattttctcttccataaaaaaag
+    cctgactccacttcccgcgtttactgattactagcgaagctgcgggtgcattttttcaagataaaggcatccccgattatattctataccgatgtggattgcgcatactttg
+    tgaacagaaagtgatagcgttgatgattcttcattggtcagaaaattatgaacggtttcttctattttgtctctatatactacgtataggaaatgtttacattttcgtattg
+    ttttcgattcactctatgaatagttcttactacaatttttttgtctaaagagtaatactagagataaacataaaaaatgtagaggtcgagtttagatgcaagttcaaggagc
+    gaaaggtggatgggtaggttatatagggatatagcacagagatatatagcaaagagatacttttgagcaatgtttgtggaagcggtattcgcaatattttagtagctcgtta
+    cagtccggtgcgtttttggttttttgaaagtgcgtcttcagagcgcttttggttttcaaaagcgctct'
+
+    #region FRT
+        'gaagttcctatactttctagagaataggaacttcggaataggaacttc'
+    #endRegion
+
+
+    'aaagcgtttccgaaaacgagcgcttccgaaaatgcaacgcgagctgcgcacatacagctcactgttcacgtcgcacctatatctgcgtgttgcctgtatatatatata
+    catgagaagaacggcatagtgcgtgtttatgcttaaatgcgtacttatatgcgtctatttatgtaggatgaaaggtagtctagtacctcctgtgatattatcccattccatg
+    cggggtatcgtatgcttccttcagcactaccctttagctgttctatatgctgccactcctcaattggattagtctcatccttcaatgctatcatttcctttgatattggatc'
+}
+
+sequence ReverseAmpR_Promoter
+{
+    'actcttcctttttcaatattattgaagcatttatcagggttattgtctcatgagcggatacatatttgaatgtatttagaaaaataaacaaataggggttccgcg'
+}
+
+sequence ReverseAmpR
+{
+    'ttaccaatgcttaatcagtgaggcacctatctcagcgatctgtctatttcgttcatccatagttgcctgactccccgtcgtgtagataactacgatacgggagggcttacc
+    atctggccccagtgctgcaatgataccgcgagacccacgctcaccggctccagatttatcagcaataaaccagccagccggaagggccgagcgcagaagtggtcctgcaact
+    ttatccgcctccatccagtctattaattgttgccgggaagctagagtaagtagttcgccagttaatagtttgcgcaacgttgttgccattgctacaggcatcgtggtgtcac
+    gctcgtcgtttggtatggcttcattcagctccggttcccaacgatcaaggcgagttacatgatcccccatgttgtgcaaaaaagcggttagctccttcggtcctccgatcgt
+    tgtcagaagtaagttggccgcagtgttatcactcatggttatggcagcactgcataattctcttactgtcatgccatccgtaagatgcttttctgtgactggtgagtactca
+    accaagtcattctgagaatagtgtatgcggcgaccgagttgctcttgcccggcgtcaatacgggataataccgcgccacatagcagaactttaaaagtgctcatcattggaa
+    aacgttcttcggggcgaaaactctcaaggatcttaccgctgttgagatccagttcgatgtaacccactcgtgcacccaactgatcttcagcatcttttactttcaccagcgt
+    ttctgggtgagcaaaaacaggaaggcaaaatgccgcaaaaaagggaataagggcgacacggaaatgttgaatactcat'
+}
+
+sequence RandomJunk_3
+{
+    'gaagatcctttgatcttttctacggggtctgacgctcagtggaacgaaaactcacgttaagggattttggtcatgagattatcaaaaaggatcttcacctagatcctttta
+    aattaaaaatgaagttttaaatcaatctaaagtatatatgagtaaacttggtctgacag'
+}
+
+sequence ori
+{
+    'tttccataggctccgcccccctgacgagcatcacaaaaatcgacgctcaagtcagaggtggcgaaacccgacaggactataaagataccaggcgtttccccctggaagctc
+    cctcgtgcgctctcctgttccgaccctgccgcttaccggatacctgtccgcctttctcccttcgggaagcgtggcgctttctcatagctcacgctgtaggtatctcagttcg
+    gtgtaggtcgttcgctccaagctgggctgtgtgcacgaaccccccgttcagcccgaccgctgcgccttatccggtaactatcgtcttgagtccaacccggtaagacacgact
+    tatcgccactggcagcagccactggtaacaggattagcagagcgaggtatgtaggcggtgctacagagttcttgaagtggtggcctaactacggctacactagaaggacagt
+    atttggtatctgcgctctgctgaagccagttaccttcggaaaaagagttggtagctcttgatccggcaaacaaaccaccgctggtagcggtggtttttttgtttgcaagcag
+    cagattacgcgcagaaaaaaaggatctcaa'
+}
+
+sequence RandomJunk_2
+{
+    'atccagctgcattaatgaatcggccaacgcgcggggagaggcggtttgcgtattgggcgctcttccgcttcctcgctcactgactcgctgcgctcggtcgttcggctgcgg
+    cgagcggtatcagctcactcaaaggcggtaatacggttatccacagaatcaggggataacgcaggaaagaacatgtgagcaaaaggccagcaaaaggccaggaaccgtaaaa
+    aggccgcgttgctggcgtt'
+}
+
+sequence CYC1_Terminator
+{
+    'atccgctctaaccgaaaaggaaggagttagacaacctgaagtctaggtccctatttatttttttatagttatgttagtattaagaacgttatttatatttcaaatttttct
+    tttttttctgtacagacgcgtgtacgcatgtaacattatactgaaaaccttgcttgagaaggttttgggacgctcgaag'
+}
+
+
+sequence MYC
+{
+    'gaacagaagttgatttccgaagaagacctc'
+}
+
+sequence T7_Promoter
+{
+    'taatacgactcactatagg'
+}
+
+sequence ADH1_Terminator
+{
+    'ggagcgacctcatgctatacctgagaaagcaacctgacctacaggaaagagttactcaagaataagaattttcgttttaaaacctaagagtcactttaaaatttgtataca
+    cttattttttttataacttatttaataataaaaatcataaatcataagaaattcgc'
+}
+
+
+
+sequence RandomJunk_1
+{
+    'ttatttagaagtgtcaacaacgtatctaccaacgatttgacccttttccatcttttcgtaaatttctggcaaggtagacaagccgacaaccttgattggagacttgaccaa
+    acctctggcgaagaattgttaattaagagctcagatcttatcgtcgtcatccttgtaatccatcgatactagtgcggccgcttgttttatatttgttgtaaaaagtagataa
+    ttacttccttgatgatctgtaaaaaagagaaaaagaaagcatctaagaacttgaaaaactacgaattagaaaagaccaaatatgtatttcttgcattgaccaatttatgcaa
+    gtttatatatatgtaaatgtaagtttcacgaggttctactaaactaaaccacccccttggttagaagaaaagagtgtgtgagaacaggctgttgttgtcacacgattcggac
+    aattctgtttgaaagagagagagtaacagtacgatcgaacgaactttgctctggagatcacagtgggcatcatagcatgtggtactaaaccctttcccgccattccagaacc
+    ttcgattgcttgttacaaaacctgtgagccgtcgctaggaccttgttgtgtgacgaaattggaagctgcaatcaataggaagacaggaagtcgagcgtgtctgggttttttc
+    agttttgttctttttgcaaacaaatcacgagcgacggtaatttctttctcgataagaggccacgtgctttatgagggtaacatcaattcaagaaggagggaaacacttcctt
+    tttctggccctgataatagtatgagggtgaagccaaaataaaggattcgcgcccaaatcggcatctttaaatgcaggtatgcgatagttcctcactctttccttactcacga
+    gtaattcttgcaaatgcctattatgcagatgttataatatctgtgcgtcttgagttgaagtcaggaatctaaaataaaaattaaggttaataaaaagaggaaagaaaaaaaa
+    attaatcgatttacagaaacttgcacactaaaaatacacaactaaaagcaattacagtatgggaagtcatcgacgttatctctactatagtatattatcatttctattatta
+    tcctgctcagtggtacttgcaaaacaagataagaccccattctttgaaggtacttccaggccggccg'
+}
+
+sequence TEF1
+{
+    'cacacaccatagcttcaaaatgtttctactccttttttactcttccagattttctcggactccgcgcatcgccgtaccacttcaaaacacccaagcacagcatactaaatt
+    tcccctctttcttcctctagggtgtcgttaattacccgtactaaaggtttggaaaagaaaaaagagaccgcctcgtttctttttcttcgtcgaaaaaggcaataaaaatttt
+    tatcacgtttctttttcttgaaaatttttttttttgatttttttctctttcgatgacctcccattgatatttaagttaataaacggtcttcaatttctcaagtttcagtttc
+    atttttcttgttctattacaactttttttacttcttgctcattagaaagaaagcatagcaatctaatctaag'
+}
+
+sequence TEF
+{
+    'gacatggaggcccagaataccctccttgacagtcttgacgtgcgcagctcaggggcatgatgtgactgtcgcccgtacatttagcccatacatccccatgtataatcattt
+    gcatccatacattttgatggccgcacggcgcgaagcaaaaattacggctcctcgctgcagacctgcgagcagggaaacgctcccctcacagacgcgttgaattgtccccacg
+    ccgcgcccctgtagagaaatataaaaggttaggatttgccactgaggttcttctttcatatacttccttttaaaatcttgctaggatacagttctcacatcacatccgaaca
+    taaacaacc'
+}
+
+sequence TEF_Term
+{
+    'actgacaataaaaagattcttgttttcaagaacttgtcatttgtatagtttttttatattgtagttgttctattttaatcaaatgttagcgtgatttatattttttttcgc
+    ctcgacatcatctgcccagatgcgaagttaagtgcgcagaaagtaatatcatgcgtcaatcgtatgtgaatgctggtcgctatactg'
+}
+
+operation P_TEF
+{
+    TEF
+    $InnerCode
+    TEF_Term
+}
+
+//Gives antibiotic resistance
+sequence KanR
+{
+    'atgggtaaggaaaagactcacgtttcgaggccgcgattaaattccaacatggatgctgatttatatgggtataaatgggctcgcgataatgtcgggcaatcaggtgcgaca
+    atctatcgattgtatgggaagcccgatgcgccagagttgtttctgaaacatggcaaaggtagcgttgccaatgatgttacagatgagatggtcagactaaactggctgacgg
+    aatttatgcctcttccgaccatcaagcattttatccgtactcctgatgatgcatggttactcaccactgcgatccccggcaaaacagcattccaggtattagaagaatatcc
+    tgattcaggtgaaaatattgttgatgcgctggcagtgttcctgcgccggttgcattcgattcctgtttgtaattgtccttttaacagcgatcgcgtatttcgtctcgctcag
+    gcgcaatcacgaatgaataacggtttggttgatgcgagtgattttgatgacgagcgtaatggctggcctgttgaacaagtctggaaagaaatgcataagcttttgccattct
+    caccggattcagtcgtcactcatggtgatttctcacttgataaccttatttttgacgaggggaaattaataggttgtattgatgttggacgagtcggaatcgcagaccgata
+    ccaggatcttgccatcctatggaactgcctcggtgagttttctccttcattacagaaacggctttttcaaaaatatggtattgataatcctgatatgaataaattgcagttt
+    catttgatgctcgatgagtttttctaa'
+}
